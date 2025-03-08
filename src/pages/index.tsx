@@ -1,27 +1,33 @@
+import type { GetStaticProps } from 'next';
 import Banner from "@/components/Banner";
 import ContentRowContainer from "@/components/ContentRowContainer";
 import ContentSection from "@/components/ContentSection";
 import Link from "next/link";
-import { useEffect, useState } from 'react';
 import { ListItem, SectionItem } from '@/data/data-type';
+import solutions from '@/data/solutions.json';
+import services from '@/data/services.json';
+import reports from '@/data/reports.json';
+import consulting from '@/data/consulting.json';
 
-interface SectionContent {
-  title: string;
-  linkHref: string;
-  image?: string;
-  items: SectionItem[];
+interface HomeProps {
+  solutions: ListItem[];
+  services: ListItem[];
+  reports: ListItem[];
+  consulting: ListItem[];
 }
 
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  return {
+    props: {
+      solutions: solutions.solutions,
+      services: services.services,
+      reports: reports.reports,
+      consulting: consulting.consulting,
+    },
+  };
+};
 
-
-export default function Home() {
-  const [solutions, setSolutions] = useState<ListItem[]>([]);
-  const [services, setServices] = useState<ListItem[]>([]);
-  const [reports, setReports] = useState<ListItem[]>([]);
-  const [consulting, setConsulting] = useState<ListItem[]>([]);
-
-
-
+export default function Home({ solutions, services, reports, consulting }: HomeProps) {
   const pageData = {
     banner: {
       imageUrl: "/banner.png",
@@ -76,28 +82,6 @@ export default function Home() {
       }
     ]
   };
-
-  useEffect(() => {
-    // 获取行业方案数据
-    fetch('/api/solutions')
-      .then(res => res.json())
-      .then(data => setSolutions(data.solutions));
-
-    // 获取专业服务数据
-    fetch('/api/services')
-      .then(res => res.json())
-      .then(data => setServices(data.services));
-
-    // 获取市场报告数据
-    fetch('/api/reports')
-      .then(res => res.json())
-      .then(data => setReports(data.reports));
-
-    // 获取产品咨询数据
-    fetch('/api/consulting')
-      .then(res => res.json())
-      .then(data => setConsulting(data.consulting));
-  }, []);
 
   return (
     <div>
