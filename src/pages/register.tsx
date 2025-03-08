@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import CaptchaImage from '@/components/CaptchaImage';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -89,15 +90,7 @@ export default function Register() {
                 value={formData.captcha}
                 onChange={(e) => setFormData({...formData, captcha: e.target.value})}
               />
-              <div className="w-32 h-10 bg-gray-100 rounded">
-                <Image
-                  src="/captcha.png"
-                  alt="验证码"
-                  width={128}
-                  height={40}
-                  className="rounded"
-                />
-              </div>
+              <CaptchaImage onRefresh={() => setFormData({...formData, captcha: ''})} />
             </div>
 
             {/* 注册按钮 */}

@@ -4,9 +4,14 @@ import Footer from '@/components/Footer';
 import '@/styles/globals.css';
 
 // 不需要通用布局的页面路径
-const noLayoutPages = ['/login', '/register', '/forgot-password'];
+const noLayoutPages = ['/login', '/register', '/forgot-password', '/404'];
 
 export default function App({ Component, pageProps, router }: AppProps) {
+  // 检查是否是 404 页面
+  if (pageProps.statusCode === 404) {
+    return <Component {...pageProps} />;
+  }
+
   // 检查当前页面是否需要通用布局
   const needsLayout = !noLayoutPages.includes(router.pathname);
 
