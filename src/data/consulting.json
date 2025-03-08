@@ -1,0 +1,22 @@
+{
+  "consulting": [
+    {
+      "id": "elderly",
+      "text": "面向中老年女性用户的瑜伽课程设计【收费】",
+      "href": "/consulting/elderly",
+      "price": 88
+    },
+    {
+      "id": "training",
+      "text": "瑜伽教练销售及服务培训SOP【收费】",
+      "href": "/consulting/training",
+      "price": 118
+    },
+    {
+      "id": "online",
+      "text": "瑜伽线上招生引流培训【收费】",
+      "href": "/consulting/online",
+      "price": 188
+    }
+  ]
+} 
