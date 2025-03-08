@@ -3,7 +3,17 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import '@/styles/globals.css';
 
-export default function App({ Component, pageProps }: AppProps) {
+// 不需要通用布局的页面路径
+const noLayoutPages = ['/login', '/register', '/forgot-password'];
+
+export default function App({ Component, pageProps, router }: AppProps) {
+  // 检查当前页面是否需要通用布局
+  const needsLayout = !noLayoutPages.includes(router.pathname);
+
+  if (!needsLayout) {
+    return <Component {...pageProps} />;
+  }
+
   return (
     <div className="bg-[#e5e5e5] min-h-screen">
       <div className="w-[1024px] mx-auto">
